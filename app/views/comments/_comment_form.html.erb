@@ -1,0 +1,14 @@
+<%= form_with(model: [post, comment], url: user_post_comments_path(post.user_id, post.id), local: true) do |form| %>
+  <div>
+    <%= form.label :content, "Add a comment" %>
+    <%= form.text_area :content, rows: 3, required: true %>
+  </div>
+
+  <% if comment.parent_id.present? %>
+    <%= form.hidden_field :parent_id, value: comment.parent_id %>
+  <% end %>
+
+  <div>
+    <%= form.submit "Submit Comment", class: "btn btn-primary" %>
+  </div>
+<% end %>

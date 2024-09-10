@@ -1,0 +1,17 @@
+<div class="comment">
+  <strong><%= comment.user.username %>:</strong> <%= comment.content %>
+  <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+
+  <% if comment.replies.any? %>
+    <div class="replies" style="margin-left: 20px;"> <!-- Add left margin to indent replies -->
+      <%= render partial: 'comments/comments', collection: comment.replies, as: :comment %>
+    </div>
+  <% end %>
+
+  <!-- Display reply form only if nesting level is below 4 -->
+  <% if comment.depth < 4 %> 
+    <div class="reply-form" style="margin-left: 20px;"> <!-- Indent reply form to align with replies -->
+      <%= render 'comments/comment_form', post: comment.commentable, comment: Comment.new(parent_id: comment.id) %>
+    </div>
+  <% end %>
+</div>

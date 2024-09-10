@@ -1,0 +1,25 @@
+<div class="show-profile">
+	<div>
+		<%if @user.image.attached? %>
+	    <%= image_tag @user.image, alt: "Post image", class: "post-image" %>
+	  <% end %>
+  </div>
+
+	<div>
+		<span>Email:</span>
+		<%= @user.full_name%>
+	</div>
+
+  <div>
+  	<span>Email:</span>
+		<%= @user.email %>
+	</div>
+
+	<div>
+		<span>Created At:</span>
+		<%= @user.created_at %>
+	</div>
+</div>
+<div>
+	<%= render 'users/user_post'%>
+</div>

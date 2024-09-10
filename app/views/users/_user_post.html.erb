@@ -1,0 +1,20 @@
+<div class="all-post">
+  <% @posts.each do |post| %>
+    <h1 class="post-title"><%= post.title %></h1>
+    <h3 class="post-content"><%= post.content %></h3>
+
+    <% if post.image.attached? %>
+      <%= image_tag post.image, alt: "Post image", class: "post-image" %>
+    <% end %>
+
+    <!-- Comments section -->
+    <div class="comments-section">
+      <%= render partial: 'comments/comments', collection: post.comments, as: :comment %>
+    </div>
+
+    <!-- Main form for adding a new top-level comment -->
+    <div class="new-comment-form">
+      <%= render 'comments/comment_form', post: post, comment: Comment.new %>
+    </div>
+  <% end %>
+</div>

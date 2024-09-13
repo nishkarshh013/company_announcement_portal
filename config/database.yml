@@ -25,4 +25,4 @@ test:
 # Production environment configuration
 production:
   <<: *default
-  url: <%= ENV['External Database URL'] %>
+  url: <%= ENV['Database_URL'] %>

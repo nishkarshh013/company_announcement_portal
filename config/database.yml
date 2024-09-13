@@ -1,14 +1,28 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %> # Max threads, adjustable via env variable
+  timeout: 5000  # Timeout for connections (in milliseconds)
 
-# Batter to put local db values in ENV
+# Development environment configuration
 development:
   <<: *default
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  host: <%= ENV['DB_HOSTNAME'] %>
-  port: <%= ENV['DB_PORT'] %>
-  database:  <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>  # Username from env variable
+  password: <%= ENV['DB_PASSWORD'] %>  # Password from env variable
+  host: <%= ENV['DB_HOSTNAME'] %>      # Hostname from env variable
+  port: <%= ENV['DB_PORT'] || 5432 %>  # Default port for PostgreSQL is 5432
+  database: <%= ENV['RDS_DB_NAME'] %>  # Database name from env variable
+
+# Test environment configuration for automated tests
+test:
+  <<: *default
+  username: <%= ENV['DB_USERNAME'] || 'postgres' %>  # Fallback to default user
+  password: <%= ENV['DB_PASSWORD'] || 'password' %>  # Fallback to default password
+  host: <%= ENV['DB_HOSTNAME'] || 'localhost' %>     # Fallback to localhost for test
+  port: <%= ENV['DB_PORT'] || 5432 %>  # Default PostgreSQL port
+  database: <%= ENV['RDS_DB_NAME'] || 'myapp_test' %>  # Fallback to `myapp_test` as test DB name
+
+# Production environment configuration
+production:
+  <<: *default
+  url: <%= ENV['Internal Database URL'] %>

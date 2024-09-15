@@ -4,7 +4,8 @@
     <h3 class="post-content"><%= post.content %></h3>
 
     <% if post.image.attached? %>
-      <%= image_tag post.image, alt: "Post image", class: "post-image" %>
+      <%= image_tag url_for(post.image), alt: "Post image", class: "post-image" %>
+      <%#= image_tag post.image, alt: "Post image", class: "post-image" %>
     <% end %>
 
     <!-- Comments section -->

@@ -1,12 +1,14 @@
 <div class="all-post">
   <% @posts.each do |post| %>
     <h1 class="post-title"><%= post.title %></h1>
+  <div class="d-flex">
     <h3 class="post-content"><%= post.content %></h3>
-
     <% if post.image.attached? %>
       <%= image_tag url_for(post.image), alt: "Post image", class: "post-image" %>
       <%#= image_tag post.image, alt: "Post image", class: "post-image" %>
     <% end %>
+  </div>
+
 
     <!-- Comments section -->
     <div class="comments-section">

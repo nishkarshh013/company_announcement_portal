@@ -1,20 +1,26 @@
-<%= form_with model: [@user, @post], local: true, multipart: true do |form| %>
-  <div>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+<div class="all-post">
+  <h5 class="text-center">Create Post</h5>
+  <div class="w-50 mx-auto">
+    <%= form_with model: [@user, @post], local: true, multipart: true do |form| %>
+      <div class="mb-3">
+        <%= form.label :title, class: "form-label" %>
+        <%= form.text_field :title, class: "form-control" %>
+      </div>
 
-  <div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
+      <div class="mb-3">
+        <%= form.label :content, class: "form-label" %>
+        <%= form.text_area :content, class: "form-control" %>
+      </div>
 
-  <div>
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
+      <div class="mb-3">
+        <%= form.label :image, class: "form-label" %>
+        <%= form.file_field :image, class: "form-control" %>
+      </div>
 
-  <div>
-    <%= form.submit %>
+      <div class="mb-3">
+        <%= form.submit "Submit", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
+

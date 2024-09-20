@@ -12,22 +12,43 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p> 
-    <p class="alert"><%= alert %></p>
+    <% if notice.present? %>
+      <p class="notice"><%= notice %></p> 
+    <% end %>
+    <% if alert.present? %>
+      <p class="notice"><%= alert %></p> 
+    <% end %>
+    <div class="container mb-4">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <%= link_to "Company Announcement Portal", root_path, class: "navbar-brand" %>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-    <div class="nav-bar">
-      <% if current_user.present? %>
-        <%= link_to "Posts", users_path, class: "nav-bar-content"%>
-        <%= link_to "Profile", user_path(current_user), class: "nav-bar-content"%>
-
-        <%= link_to "All Profiles", profiles_users_path, class: "nav-bar-content" %>
-
-        <%= link_to "Create Post", new_user_post_path(current_user), class: "nav-bar-content"%>
-
-        <%= link_to "Logout", destroy_user_session_path, data: {
-                            turbo_method: :delete
-                          }, class: "nav-bar-content"%>
-      <% end %>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <% if current_user.present? %>
+                <li class="nav-item">
+                  <%= link_to "Posts", users_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Profile", user_path(current_user), class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "All Profiles", profiles_users_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Create Post", new_user_post_path(current_user), class: "nav-link" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
     <%= yield %>
   </body>

@@ -30,9 +30,10 @@ body {
 }
 
 .post-image {
-  width: 100px;
-  max-width: 100%;
-  height: auto;
+  width: 200px;
+  height: 200px;
+  // max-width: 100%;
+  //height: auto;
   border-radius: 4px;
   margin: 10px 0;
 }

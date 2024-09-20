@@ -1,5 +1,5 @@
 <%= form_with(model: [post, comment], url: user_post_comments_path(post.user_id, post.id), local: true) do |form| %>
-  <div>
+  <div class="d-flex flex-column gap-2">
     <%= form.label :content, "Add a comment" %>
     <%= form.text_area :content, rows: 3, required: true %>
   </div>
@@ -9,6 +9,6 @@
   <% end %>
 
   <div>
-    <%= form.submit "Submit Comment", class: "btn btn-primary" %>
+    <%= form.submit "Submit Comment", class: "btn btn-primary mt-1" %>
   </div>
 <% end %>

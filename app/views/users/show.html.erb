@@ -1,25 +1,32 @@
-<div class="show-profile">
-	<div>
-		<%if @user.image.attached? %>
-	    <%= image_tag @user.image, alt: "Post image", class: "post-image" %>
-	  <% end %>
+<div class="all-post mb-4">
+  <div class="card">
+    <div class="card-body">
+      <div class="show-profile">
+        <h5>User Profile info</h5>
+        <div>
+          <%if @user.image.attached? %>
+            <%= image_tag @user.image, alt: "Post image", class: "post-image rounded-circle" %>
+          <% end %>
+        </div>
+
+        <div>
+          <span>Email:</span>
+          <%= @user.full_name%>
+        </div>
+
+        <div>
+          <span>Email:</span>
+          <%= @user.email %>
+        </div>
+
+        <div>
+          <span>Created At:</span>
+          <%= @user.created_at %>
+        </div>
+      </div>
+    </div>
   </div>
-
-	<div>
-		<span>Email:</span>
-		<%= @user.full_name%>
-	</div>
-
-  <div>
-  	<span>Email:</span>
-		<%= @user.email %>
-	</div>
-
-	<div>
-		<span>Created At:</span>
-		<%= @user.created_at %>
-	</div>
 </div>
-<div>
-	<%= render 'users/user_post'%>
-</div>
+
+
+  <%= render 'users/user_post'%>

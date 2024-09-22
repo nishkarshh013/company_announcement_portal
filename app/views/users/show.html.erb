@@ -4,11 +4,12 @@
       <div class="show-profile">
         <h5>User Profile info</h5>
         <div>
-          <%if @user.image.attached? %>
-            <%= image_tag @user.image, alt: "Post image", class: "post-image rounded-circle" %>
+          <% if @user.image.attached? %>
+            <%= image_tag @user.image, alt: "User image", class: "post-image rounded-circle" %>
           <% else %>
-            <%= image_tag profile.svg, alt: "Post image", class: "post-image rounded-circle" %>
+            <%= image_tag asset_path('profile.svg'), alt: "Default profile image", class: "post-image rounded-circle" %>
           <% end %>
+
         </div>
 
         <div>

@@ -2,16 +2,33 @@
   <strong><%= comment.user.username %>:</strong> <%= comment.content %>
   <small><%= time_ago_in_words(comment.created_at) %> ago</small>
 
-  <% if comment.replies.any? %>
-    <div class="replies" style="margin-left: 20px;"> <!-- Add left margin to indent replies -->
-      <%= render partial: 'comments/comments', collection: comment.replies, as: :comment %>
-    </div>
-  <% end %>
+  <!-- Comment image to toggle replies and reply form -->
+  <%= image_tag "comment.png", class: "comment-img", id: "comment-img-#{comment.id}", style: "width: 16px; display: block;" %>
+
+  <!-- Replies section, hidden by default -->
+  <div class="comment_replies" id="replies-<%= comment.id %>" style="display: none;">
+    <% if comment.replies.any? %>
+      <div class="replies" style="margin-left: 20px;"> <!-- Add left margin to indent replies -->
+        <%= render partial: 'comments/comments', collection: comment.replies, as: :comment %>
+      </div>
+    <% end %>
+  </div>
 
   <!-- Display reply form only if nesting level is below 4 -->
-  <% if comment.depth < 4 %> 
-    <div class="reply-form" style="margin-left: 20px;"> <!-- Indent reply form to align with replies -->
+  <% if comment.depth < 4 %>
+    <div class="reply-form" id="reply-form-<%= comment.id %>" style="margin-left: 20px; display: none;"> <!-- Indent reply form to align with replies -->
       <%= render 'comments/comment_form', post: comment.commentable, comment: Comment.new(parent_id: comment.id) %>
     </div>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Ensure the click event is attached to the specific comment image
+    $("#comment-img-<%= comment.id %>").off("click").on("click", function() {
+      // Toggle both the reply form and the replies section when the comment image is clicked
+      $("#reply-form-<%= comment.id %>").toggle();
+      $("#replies-<%= comment.id %>").toggle();
+    });
+  });
+</script>

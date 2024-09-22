@@ -1,7 +1,7 @@
 <%= form_with(model: [post, comment], url: user_post_comments_path(post.user_id, post.id), local: true) do |form| %>
   <div class="d-flex flex-column gap-2">
     <%= form.label :content, "Add a comment" %>
-    <%= form.text_area :content, rows: 3, required: true %>
+    <%= form.text_area :content, rows: 2, required: true %>
   </div>
 
   <% if comment.parent_id.present? %>
@@ -9,6 +9,15 @@
   <% end %>
 
   <div>
-    <%= form.submit "Submit Comment", class: "btn btn-primary mt-1" %>
+    <%= form.submit "Submit Comment", class: "btn btn-primary mt-1", id: "submit-btn" %>
   </div>
 <% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#submit-btn").submit(function(){
+      $("#reply-form-<%= comment.id %>").hide();
+    });
+  });
+</script>

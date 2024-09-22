@@ -1,17 +1,18 @@
 <div class="all-post">
   <% @posts.each do |post| %>
     <h1 class="post-title"><%= post.title %></h1>
-  <div class="d-flex">
-    <h3 class="post-content"><%= post.content %></h3>
-    <% if post.image.attached? %>
-      <%= image_tag url_for(post.image), alt: "Post image", class: "post-image" %>
-      <%#= image_tag post.image, alt: "Post image", class: "post-image" %>
-    <% end %>
-  </div>
+    <div class="">
+      <h3 class="post-content"><%= post.content %></h3>
+      <% if post.image.attached? %>
+        <%= image_tag url_for(post.image), alt: "Post image", class: "post-image" %>
+      <% end %>
+    </div>
 
+    <!-- Comment icon to show/hide comments -->
+    <%= image_tag "comment.png", class: "comment-img-parent", id: "parent-comment-img-#{post.id}", style: "width: 16px; display: block;" %>
 
-    <!-- Comments section -->
-    <div class="comments-section">
+    <!-- Comments section for each post, hidden by default -->
+    <div class="comments-section" id="comments-section-<%= post.id %>" style="display: none;">
       <%= render partial: 'comments/comments', collection: post.comments, as: :comment %>
     </div>
 
@@ -21,3 +22,13 @@
     </div>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Attach click event to each comment image for each post
+    $(".comment-img-parent").off("click").on("click", function(){
+      var postId = $(this).attr('id').split('-').pop();
+      $("#comments-section-" + postId).toggle();
+    });
+  });
+</script>

@@ -6,6 +6,8 @@
         <div>
           <%if @user.image.attached? %>
             <%= image_tag @user.image, alt: "Post image", class: "post-image rounded-circle" %>
+          <% else %>
+            <%= image_tag profile.svg, alt: "Post image", class: "post-image rounded-circle" %>
           <% end %>
         </div>
 
@@ -24,6 +26,7 @@
           <%= @user.created_at %>
         </div>
       </div>
+      <%= link_to "Edit Profile", edit_user_path(current_user) %>
     </div>
   </div>
 </div>
